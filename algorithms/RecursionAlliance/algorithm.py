@@ -5,16 +5,18 @@ from pathlib import Path
 from thirty_memes_bot.text import normalize
 
 FEATURES_NAME = "features.txt"
+KEY_TOKENS_NAME = "key_tokens.txt"
+SCORES_NAME = "scores.txt"
 SEPARATOR = "\n"
 BUCKETS = 30
 
 
-def _features_path() -> Path:
-    return Path(__file__).resolve().parent / FEATURES_NAME
+def _file_path(file_name) -> Path:
+    return Path(__file__).resolve().parent / file_name
 
 
-def _load_table() -> dict[int, str]:
-    raw = json.loads(_features_path().read_text(encoding="utf-8"))
+def _load_file(file_name) -> dict[int, str]:
+    raw = json.loads(_file_path(file_name).read_text(encoding="utf-8"))
     return {int(key): value for key, value in raw.items()}
 
 
@@ -28,8 +30,23 @@ def choose_meme(messages: list[str]) -> str:
     :param messages: непустой список текстовых реплик
     :return: имя существующего файла из memes/
     """
-    parts = [" ".join(normalize(message)) for message in messages]
+    parts = [" ".join(normalize(message)) for message in messages][0].split()
     text = SEPARATOR.join(parts)
-    digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
-    bucket = int(digest, 16) % BUCKETS + 1
-    return _load_table()[bucket]
+    table = _load_file(FEATURES_NAME)
+    key_tokens = _load_file(KEY_TOKENS_NAME)
+    scores = _load_file(SCORES_NAME)
+    
+    for pos in range(BUCKETS):
+        index = pos+1
+        key_tokens_list = key_tokens[index]
+        file_name = table[index]
+        for word in parts:
+            for key_token in key_tokens_list:
+                if word.startswith(key_token):
+                    scores[index] += 1
+
+    for pos in scores:
+        if scores[pos] == max([scores[pos] for pos in scores]):
+            return (table[pos])
+
+    return table[1]
