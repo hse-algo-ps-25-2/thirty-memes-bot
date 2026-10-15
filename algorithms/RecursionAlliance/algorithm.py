@@ -30,7 +30,7 @@ def choose_meme(messages: list[str]) -> str:
     :param messages: непустой список текстовых реплик
     :return: имя существующего файла из memes/
     """
-    parts = [" ".join(normalize(message)) for message in messages][0].split()
+    parts = [" ".join(normalize(message)) for message in messages][-1].split()
     text = SEPARATOR.join(parts)
     table = _load_file(FEATURES_NAME)
     key_tokens = _load_file(KEY_TOKENS_NAME)
