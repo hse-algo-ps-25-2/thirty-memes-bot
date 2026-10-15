@@ -1,0 +1,81 @@
+{
+    "start": "START",
+    "states": {
+        "START": "forget_topic",
+        "TALK": "keep_topic",
+        "LOST": "keep_topic"
+    },
+    "topic": {
+        "рекурсия": "REC",
+        "рекурсивный": "REC",
+        "динамический": "DP",
+        "беллман": "DP",
+        "структура": "DS",
+        "массив": "DS",
+        "список": "DS",
+        "стек": "DS",
+        "очередь": "DS",
+        "дерево": "DS",
+        "хеш": "DS"
+    },
+    "symbols": {
+        "не понимать": "CONFUSED",
+        "не понять": "CONFUSED",
+        "непонятно": "CONFUSED",
+        "сложность": "COMPLEXITY",
+        "сложно": "COMPLEXITY",
+        "асимптотич": "COMPLEXITY"
+    },
+    "transitions": {
+        "START": {
+            "TOPIC": "TALK",
+            "COMPLEXITY": "START",
+            "CONFUSED": "START",
+            "OTHER": "START"
+        },
+        "TALK": {
+            "TOPIC": "TALK",
+            "COMPLEXITY": "TALK",
+            "CONFUSED": "LOST",
+            "OTHER": "TALK"
+        },
+        "LOST": {
+            "TOPIC": "TALK",
+            "COMPLEXITY": "TALK",
+            "CONFUSED": "START",
+            "OTHER": "LOST"
+        }
+    },
+    "outputs": {
+        "START TOPIC REC": "02_recursion.png",
+        "START TOPIC DP": "03_dp.jpg",
+        "START TOPIC DS": "04_ds.jpg",
+        "START COMPLEXITY": "01_complexity.jpg",
+        "START CONFUSED": "07_know_nothing.jpg",
+        "START OTHER": "05_default.png",
+        "TALK TOPIC REC": "08_learned_recursion.jpg",
+        "TALK TOPIC DP": "09_worthy_opponent.png",
+        "TALK TOPIC DS": "10_linked_list.jpg",
+        "TALK COMPLEXITY REC": "11_fib_time.jpg",
+        "TALK COMPLEXITY DP": "12_fib_years.jpg",
+        "TALK COMPLEXITY DS": "13_top_k.jpg",
+        "TALK CONFUSED REC": "14_is_this_recursion.jpg",
+        "TALK CONFUSED DP": "15_hash_set.jpg",
+        "TALK CONFUSED DS": "16_reverse_tree.jpg",
+        "TALK OTHER REC": "17_base_case.png",
+        "TALK OTHER DP": "18_drake_memo.jpg",
+        "TALK OTHER DS": "19_love_trees.png",
+        "LOST TOPIC REC": "06_deep_recursion.jpg",
+        "LOST TOPIC DP": "20_two_buttons_dp.jpg",
+        "LOST TOPIC DS": "21_ds.jpg",
+        "LOST COMPLEXITY REC": "22_sisyph.png",
+        "LOST COMPLEXITY DP": "23_exponential.png",
+        "LOST COMPLEXITY DS": "24_optimize_further.jpg",
+        "LOST CONFUSED REC": "25_no_termination.jpg",
+        "LOST CONFUSED DP": "26_is_this_dp.jpg",
+        "LOST CONFUSED DS": "27_pikachu_bfs.jpg",
+        "LOST OTHER REC": "28_one_more.png",
+        "LOST OTHER DP": "29_fib_switch.png",
+        "LOST OTHER DS": "30_linkedlist_purpose.jpg"
+    }
+}
