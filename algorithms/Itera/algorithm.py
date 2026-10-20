@@ -129,7 +129,7 @@ def choose_meme(messages: list[str]) -> str:
         if len(actions) == 1:
             if actions[0] in value["actions"] and aggrWeight > 0.:
                 results[key] = aggrWeight
-            continue
+                continue
 
         if not all([need in needsKeys for need in value["needs"]]):
             continue
